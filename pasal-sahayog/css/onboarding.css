@@ -1,0 +1,273 @@
+/* ── onboarding.css ── */
+
+#screen-onboarding {
+  background: linear-gradient(155deg, #dff0e6 0%, #f0faf4 45%, #e8f5ec 100%);
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Decorative background blob */
+.ob-bg-decoration {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(82,183,136,0.18) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.ob-wrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Slides container ── */
+.ob-slides-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ob-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 28px 16px;
+  opacity: 0;
+  transform: translateX(48px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.ob-slide::-webkit-scrollbar { display: none; }
+.ob-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+.ob-slide.exit {
+  opacity: 0;
+  transform: translateX(-48px);
+}
+
+/* ── Slide 1: Welcome ── */
+.ob-hero {
+  margin-bottom: 32px;
+}
+
+.ob-logo-mark {
+  width: clamp(140px, 38vw, 180px);
+  height: clamp(140px, 38vw, 180px);
+  background: linear-gradient(135deg, #c7e9d0, #e8f5ec);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 48px rgba(45,106,79,0.16);
+  margin: 0 auto;
+}
+
+.ob-leaf {
+  font-size: clamp(60px, 16vw, 80px);
+  animation: leafFloat 3s ease-in-out infinite;
+  width: clamp(60px, 16vw, 80px);
+  height: clamp(60px, 16vw, 80px);
+  object-fit: contain;
+}
+
+@keyframes leafFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50%       { transform: translateY(-10px) rotate(5deg); }
+}
+
+.ob-text { text-align: center; margin-bottom: 40px; }
+
+.ob-app-name {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 9vw, 48px);
+  font-weight: 400;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.ob-app-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.ob-tagline {
+  font-size: clamp(14px, 3.8vw, 16px);
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.ob-cta {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-arrow { font-size: 16px; }
+
+.ob-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Slide 2 & 3 shared ── */
+.ob-slide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+.ob-back {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 6px 0;
+  transition: var(--transition);
+}
+.ob-back:hover { color: var(--primary-mid); }
+.ob-step-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--card);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+}
+
+.ob-slide-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 6vw, 28px);
+  color: var(--text);
+  margin-bottom: 6px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.ob-slide-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+/* ── Ob Form ── */
+.ob-form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+}
+
+.input-field {
+  background: var(--card);
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border);
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition);
+}
+.input-field:focus-within {
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+}
+.input-icon { font-size: 18px; flex-shrink: 0; }
+.input-field input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  background: transparent;
+}
+.input-field input::placeholder { color: var(--text-muted); }
+
+/* ── Preferences (Slide 3) ── */
+.pref-list {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-shrink: 0;
+}
+
+.pref-row {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.pref-row.privacy {
+  background: var(--primary-bg);
+  border-color: var(--primary-xlight);
+}
+
+.pref-icon-wrap {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+.pref-icon-wrap.green  { background: var(--primary-bg); }
+.pref-icon-wrap.blue   { background: #deeeff; }
+.pref-icon-wrap.purple { background: #ede8ff; }
+
+.pref-info { flex: 1; min-width: 0; }
+.pref-info strong { font-size: 14px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+.pref-info p { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+/* ── Progress dots ── */
+.ob-dots {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding: 14px 0 max(20px, env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+.ob-dot {
+  width: 8px; height: 8px;
+  border-radius: 4px;
+  background: var(--border);
+  transition: var(--transition);
+}
+.ob-dot.active { background: var(--primary-mid); width: 22px; }

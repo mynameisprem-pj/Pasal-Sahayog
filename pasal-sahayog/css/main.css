@@ -1,0 +1,121 @@
+/* ── main.css: variables, reset, base ── */
+:root {
+  /* Brand palette */
+  --primary:        #1a3d2b;
+  --primary-mid:    #2d6a4f;
+  --primary-light:  #52b788;
+  --primary-xlight: #b7e4c7;
+  --primary-bg:     #eaf6ee;
+  --accent:         #40916c;
+
+  /* Status */
+  --danger:         #d62839;
+  --danger-light:   #fde8ea;
+  --warning:        #e07b39;
+  --warning-light:  #fef0e6;
+  --success:        #52b788;
+
+  /* Neutrals */
+  --bg:             #f4f7f5;
+  --card:           #ffffff;
+  --text:           #141f18;
+  --text-secondary: #4a6655;
+  --text-muted:     #8fa89a;
+  --border:         #dde8e2;
+  --border-light:   #edf4f0;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(26,61,43,0.07);
+  --shadow:    0 2px 12px rgba(26,61,43,0.09);
+  --shadow-md: 0 4px 24px rgba(26,61,43,0.12);
+  --shadow-lg: 0 8px 40px rgba(26,61,43,0.18);
+
+  /* Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius:    18px;
+  --radius-lg: 24px;
+
+  /* Layout */
+  --nav-height: 68px;
+  --top-height: 64px;
+
+  /* Fonts */
+  --font-display: 'DM Serif Display', serif;
+  --font-body:    'Outfit', sans-serif;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: all 0.22s var(--ease);
+  --transition-slow: all 0.38s var(--ease);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-body);
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; }
+input, textarea, select { font-family: var(--font-body); }
+
+img { display: block; max-width: 100%; }
+
+/* Scrollbar hide */
+.no-scroll::-webkit-scrollbar { display: none; }
+.no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Screen system ── */
+.screen {
+  display: none;
+  height: 100dvh;
+  overflow: hidden;
+  animation: screenIn 0.28s var(--ease);
+}
+.screen.active { display: flex; flex-direction: column; }
+
+@keyframes screenIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: calc(var(--nav-height) + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--text);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition);
+  max-width: calc(100vw - 32px);
+  white-space: normal;
+  text-align: center;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast.success { background: var(--primary-mid); }
+.toast.error   { background: var(--danger); }

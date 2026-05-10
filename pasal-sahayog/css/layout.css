@@ -1,0 +1,219 @@
+/* ── layout.css ── */
+
+#screen-app {
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* ── Top Bar ── */
+#top-bar {
+  height: var(--top-height);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  flex-shrink: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.top-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  border: 2px solid var(--primary-xlight);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.top-logo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.top-shop-info {
+  flex: 1;
+  min-width: 0;
+}
+.top-shop-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+.top-shop-addr {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.top-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* ── Icon Button ── */
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  transition: var(--transition);
+  position: relative;
+  color: var(--text);
+}
+.icon-btn:hover {
+  background: var(--primary-bg);
+  border-color: var(--primary-xlight);
+}
+
+.notif-badge {
+  position: absolute;
+  top: -2px; right: -2px;
+  width: 18px; height: 18px;
+  background: var(--danger);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  line-height: 1;
+}
+
+/* ── Pages (content areas) ── */
+.page {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+.page.active {
+  display: flex;
+  animation: pageIn 0.25s var(--ease);
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.page-scroll::-webkit-scrollbar { display: none; }
+
+/* ── Bottom Nav ── */
+#bottom-nav {
+  height: var(--nav-height);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  z-index: 100;
+  box-shadow: 0 -1px 8px rgba(26,61,43,0.06);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 0 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: var(--transition);
+  position: relative;
+}
+.nav-item .nav-icon {
+  font-size: 22px;
+  transition: var(--transition);
+  line-height: 1;
+}
+.nav-item.active {
+  color: var(--primary-mid);
+}
+.nav-item.active .nav-icon {
+  transform: scale(1.08);
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 3px;
+  background: var(--primary-mid);
+  border-radius: 0 0 6px 6px;
+  transition: var(--transition);
+}
+.nav-item.active::after { width: 28px; }
+
+/* ── FAB ── */
+.fab {
+  position: fixed;
+  bottom: calc(var(--nav-height) + 14px);
+  right: 18px;
+  width: 54px; height: 54px;
+  background: var(--primary-mid);
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(45,106,79,0.45);
+  transition: var(--transition);
+  z-index: 200;
+  line-height: 1;
+  font-weight: 300;
+}
+.fab:hover {
+  background: var(--accent);
+  transform: scale(1.08) rotate(90deg);
+  box-shadow: 0 6px 24px rgba(45,106,79,0.55);
+}
+.fab:active { transform: scale(0.96); }

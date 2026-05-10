@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1a3d2b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="Pasal Sahayog – Simple stock management for every shop">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="assets/icons/favicon.ico">
+  <title>Pasal Sahayog</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/onboarding.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/stock.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ONBOARDING -->
+  <div id="screen-onboarding" class="screen active">
+    <div class="ob-bg-decoration"></div>
+    <div class="ob-wrap">
+      <div class="ob-slides-container">
+
+        <!-- Slide 1: Welcome -->
+        <div class="ob-slide active" id="ob-slide-1">
+          <div class="ob-hero">
+            <div class="ob-logo-mark">
+              <img src="assets/icons/icon-192.png" alt="Pasal Sahayog" class="ob-leaf">
+            </div>
+          </div>
+          <div class="ob-text">
+            <h1 class="ob-app-name">Pasal<br><em>Sahayog</em></h1>
+            <p class="ob-tagline">Your shop's silent partner.</p>
+          </div>
+          <div class="ob-cta">
+            <button class="btn btn-primary" id="btn-ob-start">
+              Create Your Shop <span class="btn-arrow">→</span>
+            </button>
+            <p class="ob-note">Free forever · Works offline · 😀</p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Shop Setup -->
+        <div class="ob-slide" id="ob-slide-2">
+          <div class="ob-slide-header">
+            <button class="ob-back" id="btn-ob-back-2">← Back</button>
+            <span class="ob-step-label">Step 1 of 2</span>
+          </div>
+          <h2 class="ob-slide-title">Set up your shop</h2>
+          <p class="ob-slide-sub">Tell us a little about your shop</p>
+
+          <div class="logo-upload-zone" id="logo-upload-zone">
+            <div class="logo-circle" id="logo-circle">
+              <img id="logo-preview" src="" alt="" style="display:none;">
+              <span class="logo-placeholder" id="logo-placeholder">📷</span>
+            </div>
+            <div class="logo-plus-btn">＋</div>
+            <input type="file" id="logo-file-input" accept="image/*" style="display:none;">
+          </div>
+          <p class="logo-hint">Tap to add logo (optional)</p>
+
+          <div class="ob-form">
+            <div class="input-field">
+              <span class="input-icon">🛒</span>
+              <input type="text" id="shop-name-input" placeholder="Shop name *" maxlength="40" autocomplete="off">
+            </div>
+            <div class="input-field">
+              <span class="input-icon">🏠</span>
+              <input type="text" id="shop-addr-input" placeholder="Address (optional)" maxlength="80" autocomplete="off">
+            </div>
+          </div>
+          <button class="btn btn-primary" id="btn-ob-next-2">Continue →</button>
+        </div>
+
+        <!-- Slide 3: Preferences -->
+        <div class="ob-slide" id="ob-slide-3">
+          <div class="ob-slide-header">
+            <button class="ob-back" id="btn-ob-back-3">← Back</button>
+            <span class="ob-step-label">Step 2 of 2</span>
+          </div>
+          <h2 class="ob-slide-title">Quick preferences</h2>
+          <p class="ob-slide-sub">You can change these anytime in settings</p>
+
+          <div class="pref-list">
+            <div class="pref-row">
+              <div class="pref-icon-wrap green">🔔</div>
+              <div class="pref-info">
+                <strong>Low stock alerts</strong>
+                <p>Get notified when items run low</p>
+              </div>
+              <button class="toggle on" id="pref-alerts" aria-label="Toggle alerts"></button>
+            </div>
+            <div class="pref-row">
+              <div class="pref-icon-wrap blue">📦</div>
+              <div class="pref-info">
+                <strong>Show out of stock</strong>
+                <p>Keep items with 0 quantity visible</p>
+              </div>
+              <button class="toggle on" id="pref-zero" aria-label="Toggle zero stock"></button>
+            </div>
+            <div class="pref-row privacy">
+              <div class="pref-icon-wrap purple">🔒</div>
+              <div class="pref-info">
+                <strong>Your data, your device</strong>
+                <p>Everything is stored locally — no servers, no cloud, no data shared</p>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="btn-ob-finish">Save &amp; Start →</button>
+        </div>
+
+      </div>
+      <div class="ob-dots">
+        <div class="ob-dot active" id="dot-1"></div>
+        <div class="ob-dot" id="dot-2"></div>
+        <div class="ob-dot" id="dot-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="screen-app" class="screen">
+
+    <!-- Top Bar -->
+    <header id="top-bar">
+      <div class="top-left">
+        <div class="top-logo" id="top-logo">🏪</div>
+        <div class="top-shop-info">
+          <div class="top-shop-name" id="top-shop-name">My Shop</div>
+          <div class="top-shop-addr" id="top-shop-addr"></div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="notif-btn" aria-label="Notifications">
+          🔔
+          <span class="notif-badge" id="notif-badge" style="display:none;"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page: Dashboard -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-scroll">
+        <div class="dash-search-area">
+          <div class="search-bar" id="dash-search-bar">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="dash-search-input" placeholder="Search items…" autocomplete="off">
+            <button class="search-clear" id="dash-search-clear" style="display:none;">✕</button>
+          </div>
+        </div>
+        <!-- Search Results (hidden by default) -->
+        <div id="dash-search-results" style="display:none;">
+          <div class="stock-list" id="dash-search-list"></div>
+        </div>
+        <!-- Normal Dashboard Content -->
+        <div id="dash-main-content">
+          <div class="dash-stats" id="dash-stats"></div>
+          <div class="dash-section">
+            <div class="sec-hdr">
+              <span class="sec-title">Stock Overview</span>
+            </div>
+            <div class="chart-card" id="chart-card">
+              <div class="chart-inner" id="chart-inner">
+                <div class="chart-empty">Add items to see overview</div>
+              </div>
+            </div>
+          </div>
+          <div class="dash-section">
+            <div class="sec-hdr">
+              <span class="sec-title">Recent Items</span>
+              <button class="sec-link" id="see-all-btn">See all →</button>
+            </div>
+            <div id="recent-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page: Stock -->
+    <div class="page" id="page-stock">
+      <div class="stock-top">
+        <div class="stock-title-row">
+          <h2 class="stock-page-title">My Stock</h2>
+          <span class="stock-count-badge" id="stock-count-badge">0 items</span>
+        </div>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="stock-search-input" placeholder="Search items…" autocomplete="off">
+          <button class="search-clear" id="stock-search-clear" style="display:none;">✕</button>
+        </div>
+        <div class="filter-chips-scroll">
+          <div class="filter-chips" id="filter-chips">
+            <button class="chip active" data-cat="all">All</button>
+          </div>
+        </div>
+      </div>
+      <div class="page-scroll stock-scroll">
+        <div class="stock-list" id="stock-list"></div>
+      </div>
+    </div>
+
+    <!-- Page: Settings -->
+    <div class="page" id="page-settings">
+      <div class="page-scroll">
+        <div class="settings-body">
+          <div class="settings-section-title">Shop</div>
+          <div class="shop-banner" id="settings-shop-banner">
+            <div class="shop-banner-logo" id="settings-banner-logo">🏪</div>
+            <div class="shop-banner-info">
+              <div class="shop-banner-name" id="settings-banner-name">My Shop</div>
+              <div class="shop-banner-addr" id="settings-banner-addr"></div>
+            </div>
+            <button class="edit-shop-btn" id="btn-edit-shop">Edit</button>
+          </div>
+
+          <div class="settings-section-title">Preferences</div>
+          <div class="settings-card">
+            <div class="settings-item">
+              <div class="si-icon green">🔔</div>
+              <div class="si-info">
+                <div class="si-label">Low stock alerts</div>
+                <div class="si-desc">Notify when items fall below threshold</div>
+              </div>
+              <button class="toggle on" id="setting-alerts"></button>
+            </div>
+            <div class="settings-item">
+              <div class="si-icon blue">📦</div>
+              <div class="si-info">
+                <div class="si-label">Show zero-stock items</div>
+                <div class="si-desc">Keep empty items visible in stock</div>
+              </div>
+              <button class="toggle on" id="setting-zero"></button>
+            </div>
+          </div>
+
+          <div class="settings-section-title">Data</div>
+          <div class="settings-card">
+            <div class="settings-item" id="btn-backup">
+              <div class="si-icon orange">💾</div>
+              <div class="si-info">
+                <div class="si-label">Backup data</div>
+                <div class="si-desc">Export all data as a JSON file</div>
+              </div>
+              <span class="si-arrow">›</span>
+            </div>
+            <div class="settings-item" id="btn-restore">
+              <div class="si-icon green">📂</div>
+              <div class="si-info">
+                <div class="si-label">Restore from backup</div>
+                <div class="si-desc">Import a previously exported file</div>
+              </div>
+              <span class="si-arrow">›</span>
+            </div>
+            <input type="file" id="restore-file-input" accept=".json" style="display:none;">
+          </div>
+
+          <div class="settings-section-title">Danger Zone</div>
+          <div class="settings-card">
+            <div class="settings-item danger-item" id="btn-clear-data">
+              <div class="si-icon red">🗑️</div>
+              <div class="si-info">
+                <div class="si-label" style="color:var(--danger)">Clear all data</div>
+                <div class="si-desc">Delete everything and start fresh</div>
+              </div>
+              <span class="si-arrow">›</span>
+            </div>
+          </div>
+
+          <div class="settings-section-title">About</div>
+          
+          <!-- App Information -->
+          <div class="settings-card">
+            <div class="about-app">
+              <div class="about-app-logo">
+                <img src="assets/icons/icon-192.png" alt="Pasal Sahayog">
+              </div>
+              <div class="about-app-info">
+                <div class="about-app-name">Pasal Sahayog</div>
+                <div class="about-app-tagline">Simple stock management for every shop</div>
+                <div class="about-app-version">Version 1.0.0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Developer Information -->
+          <div class="settings-card">
+            <div class="about-developer">
+              <div class="dev-header">Developer</div>
+              <div class="dev-name">Prem Jha</div>
+              <div class="dev-links">
+                <a class="dev-link" href="https://www.linkedin.com/in/prem-jha-544536406/" target="_blank" rel="noopener noreferrer">
+                  <span class="dev-link-icon">🔗</span> Linkedin
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav id="bottom-nav">
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">🏠</span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" data-page="stock">
+        <span class="nav-icon">📦</span>
+        <span>Stock</span>
+      </button>
+      <button class="nav-item" data-page="settings">
+        <span class="nav-icon">⚙️</span>
+        <span>Settings</span>
+      </button>
+    </nav>
+
+    <!-- FAB -->
+    <button class="fab" id="fab-add" aria-label="Add item">＋</button>
+
+  </div><!-- end screen-app -->
+
+</div><!-- end app -->
+
+<!-- MODALS -->
+
+<!-- Add / Edit Item Modal -->
+<div class="modal-overlay" id="modal-item">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-item-title">Add Item</h3>
+      <button class="modal-close" id="modal-item-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label class="form-label">Item Name *</label>
+        <input class="form-input" type="text" id="field-name" placeholder="e.g. Notebook A4" autocomplete="off" maxlength="60">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Category *</label>
+        <input class="form-input" type="text" id="field-cat" placeholder="e.g. Stationery" autocomplete="off" maxlength="30" list="cat-datalist">
+        <datalist id="cat-datalist"></datalist>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label class="form-label">Quantity *</label>
+          <input class="form-input" type="number" id="field-qty" placeholder="0" min="0">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Min Alert Threshold</label>
+          <input class="form-input" type="number" id="field-min" placeholder="5" min="0">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" id="modal-item-cancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="modal-item-save">Save Item</button>
+    </div>
+  </div>
+</div>
+
+<!-- Item Action Modal (edit/delete) -->
+<div class="modal-overlay" id="modal-action">
+  <div class="modal modal-sm">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-action-title">Item</h3>
+      <button class="modal-close" id="modal-action-close">✕</button>
+    </div>
+    <div class="modal-body modal-body-sm">
+      <div class="action-item-info" id="action-item-info"></div>
+      <button class="action-row-btn" id="btn-action-edit">
+        <span>✏️</span> Edit Item
+      </button>
+      <button class="action-row-btn danger" id="btn-action-delete">
+        <span>🗑️</span> Delete Item
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Shop Modal -->
+<div class="modal-overlay" id="modal-edit-shop">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">Edit Shop Info</h3>
+      <button class="modal-close" id="modal-edit-shop-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="logo-upload-zone" id="edit-logo-zone">
+        <div class="logo-circle" id="edit-logo-circle">
+          <img id="edit-logo-preview" src="" alt="" style="display:none;">
+          <span class="logo-placeholder" id="edit-logo-placeholder">🏪</span>
+        </div>
+        <div class="logo-plus-btn">✎</div>
+        <input type="file" id="edit-logo-input" accept="image/*" style="display:none;">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Shop Name *</label>
+        <input class="form-input" type="text" id="edit-shop-name" placeholder="Shop name" maxlength="40">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Address (optional)</label>
+        <input class="form-input" type="text" id="edit-shop-addr" placeholder="Address" maxlength="80">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" id="modal-edit-shop-cancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="modal-edit-shop-save">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- Notifications Panel -->
+<div class="modal-overlay" id="notif-panel-overlay">
+  <div class="modal notif-modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">🔔 Alerts</h3>
+      <button class="modal-close" id="notif-panel-close">✕</button>
+    </div>
+    <div id="notif-list"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<!-- JS -->
+<script src="js/utils/helpers.js"></script>
+<script src="js/utils/backup.js"></script>
+<script src="js/store.js"></script>
+<script src="js/components/toast.js"></script>
+<script src="js/components/chart.js"></script>
+<script src="js/components/itemCard.js"></script>
+<script src="js/components/modal.js"></script>
+<script src="js/components/notifications.js"></script>
+<script src="js/pages/onboarding.js"></script>
+<script src="js/pages/dashboard.js"></script>
+<script src="js/pages/stock.js"></script>
+<script src="js/pages/settings.js"></script>
+<script src="js/router.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

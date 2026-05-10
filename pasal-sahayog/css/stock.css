@@ -1,0 +1,115 @@
+/* ── stock.css ── */
+
+#page-stock {
+  overflow: hidden;
+}
+
+.stock-top {
+  background: var(--card);
+  border-bottom: 1px solid var(--border-light);
+  padding: 14px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.stock-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stock-page-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.stock-count-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--bg);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+}
+
+/* Filter chips */
+.filter-chips-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+.filter-chips-scroll::-webkit-scrollbar { display: none; }
+
+.filter-chips {
+  display: flex;
+  gap: 7px;
+  width: max-content;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.chip.active,
+.chip:hover {
+  background: var(--primary-mid);
+  color: white;
+  border-color: var(--primary-mid);
+}
+
+/* Stock scroll */
+.stock-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.stock-scroll::-webkit-scrollbar { display: none; }
+
+.stock-list {
+  padding: 14px 16px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Loading placeholder */
+.skeleton-card {
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-light);
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
+}
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.sk-bar {
+  background: var(--bg);
+  border-radius: 6px;
+  height: 14px;
+}
+.sk-left { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.sk-right { width: 80px; height: 33px; background: var(--bg); border-radius: 9px; }
