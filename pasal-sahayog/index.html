@@ -271,7 +271,7 @@
 
           <div class="settings-section-title">Danger Zone</div>
           <div class="settings-card">
-            <div class="settings-item danger-item" id="btn-clear-data">
+            <div class="settings-item danger-item" id="btn-clear-data-trigger">
               <div class="si-icon red">🗑️</div>
               <div class="si-info">
                 <div class="si-label" style="color:var(--danger)">Clear all data</div>
@@ -307,6 +307,18 @@
                   <span class="dev-link-icon">🔗</span> Linkedin
                 </a>
               </div>
+            </div>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="settings-card">
+            <div class="settings-item" id="btn-disclaimer">
+              <div class="si-icon orange">⚠️</div>
+              <div class="si-info">
+                <div class="si-label">Disclaimer</div>
+                <div class="si-desc">Important information about data storage</div>
+              </div>
+              <span class="si-arrow">›</span>
             </div>
           </div>
         </div>
@@ -436,6 +448,62 @@
       <button class="modal-close" id="notif-panel-close">✕</button>
     </div>
     <div id="notif-list"></div>
+  </div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="modal-overlay" id="modal-disclaimer">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">Disclaimer</h3>
+      <button class="modal-close" id="modal-disclaimer-close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="disclaimer-content">
+        <div class="disclaimer-section">
+          <div class="disclaimer-heading">⚠️ Offline Storage</div>
+          <p class="disclaimer-text">This app is designed to work completely offline. All your data (shop info, items, stock) is stored locally on your device.</p>
+        </div>
+        <div class="disclaimer-section">
+          <div class="disclaimer-heading">📱 Data Loss Risk</div>
+          <p class="disclaimer-text">If your device is damaged, lost, factory reset, or any other issue occurs with your device, your data will be permanently lost. We have no access to your data and cannot recover it.</p>
+        </div>
+        <div class="disclaimer-section">
+          <div class="disclaimer-heading">💾 Recommended Practice</div>
+          <p class="disclaimer-text">We strongly recommend regularly backing up your data using the "Backup data" feature in settings. This ensures you can restore your information if needed.</p>
+        </div>
+        <div class="disclaimer-section">
+          <div class="disclaimer-heading">✅ Your Responsibility</div>
+          <p class="disclaimer-text">You are responsible for maintaining backups of your data. Any data loss due to device issues is not the developer's responsibility.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-sm" id="modal-disclaimer-close-btn">Understood</button>
+    </div>
+  </div>
+</div>
+
+<!-- Clear Data Confirmation Modal -->
+<div class="modal-overlay" id="modal-clear-data">
+  <div class="modal modal-sm">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <h3 class="modal-title">Clear All Data?</h3>
+      <button class="modal-close" id="modal-clear-data-close">✕</button>
+    </div>
+    <div class="modal-body modal-body-sm">
+      <div class="clear-data-warning">
+        <div class="warning-icon">🗑️</div>
+        <div class="warning-title">This action cannot be undone</div>
+        <div class="warning-desc">All your shop information, items, and stock data will be permanently deleted. This data cannot be accessed again.</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-sm" id="modal-clear-data-cancel">Cancel</button>
+      <button class="btn btn-danger btn-sm" id="modal-clear-data-confirm">Delete Everything</button>
+    </div>
   </div>
 </div>
 

@@ -47,14 +47,45 @@ const Settings = (() => {
       restoreInput.value = '';
     });
 
-    // Clear all data
-    document.getElementById('btn-clear-data')?.addEventListener('click', () => {
-      if (confirm('Delete ALL data including shop info and items? This cannot be undone.')) {
-        Store.clearAll();
-        Toast.show('All data cleared', 'default');
-        // Reload to onboarding
-        setTimeout(() => location.reload(), 1000);
-      }
+    // Clear all data - now opens modal instead of browser confirm
+    document.getElementById('btn-clear-data-trigger')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-clear-data');
+      if (modal) modal.classList.add('open');
+    });
+
+    document.getElementById('modal-clear-data-close')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-clear-data');
+      if (modal) modal.classList.remove('open');
+    });
+
+    document.getElementById('modal-clear-data-cancel')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-clear-data');
+      if (modal) modal.classList.remove('open');
+    });
+
+    document.getElementById('modal-clear-data-confirm')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-clear-data');
+      if (modal) modal.classList.remove('open');
+      Store.clearAll();
+      Toast.show('All data cleared', 'default');
+      // Reload to onboarding
+      setTimeout(() => location.reload(), 1000);
+    });
+
+    // Disclaimer
+    document.getElementById('btn-disclaimer')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-disclaimer');
+      if (modal) modal.classList.add('open');
+    });
+
+    document.getElementById('modal-disclaimer-close')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-disclaimer');
+      if (modal) modal.classList.remove('open');
+    });
+
+    document.getElementById('modal-disclaimer-close-btn')?.addEventListener('click', () => {
+      const modal = document.getElementById('modal-disclaimer');
+      if (modal) modal.classList.remove('open');
     });
   }
 
